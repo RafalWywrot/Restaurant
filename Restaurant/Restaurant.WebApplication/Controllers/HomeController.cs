@@ -13,7 +13,6 @@ namespace Restaurant.WebApplication.Controllers
     public class HomeController : Controller
     {
         private ITestService _testService { get; }
-        //private IMapper _mapper { get; }
         
         public HomeController(ITestService testService)
         {
@@ -23,20 +22,7 @@ namespace Restaurant.WebApplication.Controllers
 
         public ActionResult Index()
         {
-
             var tests = Mapper.Map<List<TestViewModel>>(_testService.aa());
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
             return View();
         }
     }
