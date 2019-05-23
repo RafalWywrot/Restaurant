@@ -13,16 +13,18 @@ namespace Restaurant.WebApplication.Controllers
     public class HomeController : Controller
     {
         private ITestService _testService { get; }
-        private IMapper _mapper { get; }
-
-        public HomeController(ITestService testService, IMapper mapper)
+        //private IMapper _mapper { get; }
+        
+        public HomeController(ITestService testService)
         {
             _testService = testService;
-            _mapper = mapper;
+            
         }
+
         public ActionResult Index()
         {
-            var tests = _mapper.Map<List<TestViewModel>>(_testService.aa());
+
+            var tests = Mapper.Map<List<TestViewModel>>(_testService.aa());
             return View();
         }
 

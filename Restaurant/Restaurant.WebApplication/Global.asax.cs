@@ -1,5 +1,7 @@
 ﻿using Autofac.Integration.Mvc;
+using AutoMapper;
 using Restaurant.WebApplication.App_Start;
+using Restaurant.WebApplication.Helpers.AutoMapperProfiles;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ using System.Web.Routing;
 
 namespace Restaurant.WebApplication
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication :  System.Web.HttpApplication
     {
         protected void Application_Start()
         {
@@ -18,9 +20,7 @@ namespace Restaurant.WebApplication
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            var container = IoCConfig.RegisterServices();
-            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+            Mapper.Initialize(cfg => cfg.AddProfile<AutoMapperProfile>());
         }
     }
 }

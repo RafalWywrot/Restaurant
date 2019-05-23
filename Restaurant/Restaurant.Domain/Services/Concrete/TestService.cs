@@ -14,19 +14,16 @@ namespace Restaurant.Domain.Services.Concrete
     public class TestService : ITestService
     {
         private ITestRepository _testRepository { get; }
-        private IMapper __mapper { get; }
 
-        public TestService(ITestRepository testRepository, IMapper mapper)
+        public TestService(ITestRepository testRepository)
         {
             _testRepository = testRepository;
-            __mapper = mapper;
         }
-
 
         public IList<TestDto> aa()
         {
             var tests = _testRepository.GetAll();
-            return __mapper.Map<IList<TestDto>>(tests);
+            return Mapper.Map<IList<TestDto>>(tests);
         }
     }
 }
