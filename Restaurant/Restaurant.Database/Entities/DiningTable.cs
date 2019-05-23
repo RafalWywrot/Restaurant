@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Database.Entities
 {
-    public class Test
+    public class DiningTable
     {
         public virtual int Id { get; set; }
-        public virtual string Name { get; set; }
+        public virtual int Number { get; set; }
+        public virtual int AvailableChairs { get; set; }
     }
 }

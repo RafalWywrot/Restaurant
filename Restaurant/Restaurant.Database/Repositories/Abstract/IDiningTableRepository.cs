@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Database.Repositories.Abstract
 {
-    public interface ITestRepository
+    public interface IDiningTableRepository
     {
-        List<Test> GetAll();
+        List<DiningTable> GetAll();
     }
 }

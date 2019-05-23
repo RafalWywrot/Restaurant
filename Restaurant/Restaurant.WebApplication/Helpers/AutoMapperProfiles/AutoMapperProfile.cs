@@ -13,18 +13,8 @@ namespace Restaurant.WebApplication.Helpers.AutoMapperProfiles
     {
         public AutoMapperProfile()
         {
-            CreateMap<Entities.Test, DTO.TestDto>();
-            CreateMap<DTO.TestDto, Entities.Test >();
-            CreateMap<DTO.TestDto, ViewModels.TestViewModel>()
-                .ForMember(
-                    dest => dest.Id,
-                    opt => opt.Ignore()
-                )
-                .ForMember(
-                    dest => dest.Name,
-                    opt => opt.MapFrom(src => string.Format("viewmodel : {0}", src.Name))
-                );
-            CreateMap<ViewModels.TestViewModel, DTO.TestDto>();
+            CreateMap<Entities.DiningTable, DTO.DiningTableDTO>().ReverseMap();
+            CreateMap<DTO.DiningTableDTO, ViewModels.DiningTableViewModel>().ReverseMap();
         }
     }
 }

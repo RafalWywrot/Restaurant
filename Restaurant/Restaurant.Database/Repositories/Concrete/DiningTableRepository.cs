@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Database.Repositories.Concrete
 {
-    public class TestRepository : ITestRepository
+    public class DiningTableRepository : IDiningTableRepository
     {
         private NHibernate.ISessionFactory _sessionFactory { get; }
 
-        public TestRepository(IRestaurantSessionFactory sessionFactory)
+        public DiningTableRepository(IRestaurantSessionFactory sessionFactory)
         {
             _sessionFactory = sessionFactory.CreateSessionFactory();
         }
 
-        public List<Test> GetAll()
+        public List<DiningTable> GetAll()
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
-                return session.Query<Test>().ToList();
+                return session.Query<DiningTable>().ToList();
             }
         }
     }

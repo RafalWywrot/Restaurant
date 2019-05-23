@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Restaurant.Domain.Services.Abstract
 {
-    public interface ITestService
+    public interface IBookTableService
     {
-        IList<TestDto> aa();
+        List<DiningTableDTO> GetAll();
     }
 }

@@ -92,12 +92,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Test.cs" />
-    <Compile Include="Mappings\TestMap.cs" />
+    <Compile Include="Entities\DiningTable.cs" />
+    <Compile Include="Mappings\DiningTableMap.cs" />
     <Compile Include="ApplicationUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Abstract\ITestRepository.cs" />
-    <Compile Include="Repositories\Concrete\TestRepository.cs" />
+    <Compile Include="Repositories\Abstract\IDiningTableRepository.cs" />
+    <Compile Include="Repositories\Concrete\DiningTableRepository.cs" />
     <Compile Include="RestaurantSessionFactory.cs" />
   </ItemGroup>
   <ItemGroup />
