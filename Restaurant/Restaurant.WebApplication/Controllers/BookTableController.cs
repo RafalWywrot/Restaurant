@@ -21,8 +21,22 @@ namespace Restaurant.WebApplication.Controllers
         // GET: BookTable
         public ActionResult Index()
         {
-            var booktables = bookTableService.GetAll();
-            return View(Mapper.Map<List<DiningTableViewModel>>(booktables));
+            var model = new DiningTableFormViewModel()
+            {
+                ChairsOptions = Mapper.Map<List<SelectListItem>>(bookTableService.GetChairsOptions().OrderBy(x => x))
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Index(DiningTableFormViewModel model)
+        {
+            var startDate = new DateTime(model.StartDate.Year, model.StartDate.Month, model.StartDate.Day, model.StartTime.Hour, model.StartTime.Minute, 0);
+            var endDate = new DateTime(model.StartDate.Year, model.StartDate.Month, model.StartDate.Day, model.EndTime.Hour, model.EndTime.Minute, 0);
+            var availableTables = bookTableService.GetAvailableTables(model.SelectedNumberOfChairs, startDate, endDate);
+            model.ChairsOptions = Mapper.Map<List<SelectListItem>>(bookTableService.GetChairsOptions());
+            model.AvailableTables = Mapper.Map<List<DiningTableViewModel>>(availableTables);
+            return View(model);
         }
     }
 }

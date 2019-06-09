@@ -1,39 +1,94 @@
-﻿@model IEnumerable<Restaurant.WebApplication.Models.DiningTableViewModel>
-
+﻿@model Restaurant.WebApplication.Models.DiningTableFormViewModel
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@using (Html.BeginForm("Index", "BookTable", FormMethod.Post, new { @id = "basicExample", @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Number)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AvailableChairs)
-        </th>
-        <th></th>
-    </tr>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.SelectedNumberOfChairs, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.SelectedNumberOfChairs, Model.ChairsOptions, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.SelectedNumberOfChairs, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "date start form-control", @placeholder = "Website Address" } })
+            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Number)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AvailableChairs)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+    <div class="form-group">
+        @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "time start form-control", @placeholder = "Website Address" } })
+            @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "time end form-control" } })
+            @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+}
+@if (Model.AvailableTables != null)
+{
+    if (Model.AvailableTables.Count == 0)
+    {
+        <text>no available tables</text>
+    }
+    else
+    {
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th class="col-md-6">id</th>
+                    <th class="col-md-6">ilosc miejsc</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var table in Model.AvailableTables)
+                {
+                    <tr>
+                        <td class="col-md-6">@table.Id</td>
+                        <td class="col-md-6">@table.AvailableChairs</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
 }
 
-</table>
+
+@section Scripts {
+    <script type="text/javascript">
+        $('#basicExample .time').timepicker({
+            'showDuration': true,
+            'timeFormat': 'g:ia'
+        });
+
+        $('#basicExample .date').datepicker({
+            'format': 'yyyy-MM-dd',
+            'autoclose': true
+        });
+        // initialize datepair
+        var basicExampleEl = document.getElementById('basicExample');
+        var datepair = new Datepair(basicExampleEl);
+    </script>
+
+}  

@@ -9,6 +9,7 @@ namespace Restaurant.Database.Repositories.Abstract
 {
     public interface IDiningTableRepository
     {
-        List<DiningTable> GetAll();
+        IList<DiningTable> GetAll();
+        IList<DiningTable> GetByChairs(int chairs);
     }
 }

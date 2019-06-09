@@ -18,11 +18,19 @@ namespace Restaurant.Database.Repositories.Concrete
             _sessionFactory = sessionFactory.CreateSessionFactory();
         }
 
-        public List<DiningTable> GetAll()
+        public IList<DiningTable> GetAll()
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
                 return session.Query<DiningTable>().ToList();
+            }
+        }
+
+        public IList<DiningTable> GetByChairs(int chairs)
+        {
+            using (ISession session = _sessionFactory.OpenSession())
+            {
+                return session.QueryOver<DiningTable>().Where(x => x.AvailableChairs == chairs).List();
             }
         }
     }

@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTO\DiningTableDTO.cs" />
+    <Compile Include="DTO\ReservationDiningTableDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Abstract\IBookTableService.cs" />
     <Compile Include="Services\Concrete\BookTableService.cs" />

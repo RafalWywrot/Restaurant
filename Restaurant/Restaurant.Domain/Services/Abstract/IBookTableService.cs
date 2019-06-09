@@ -9,6 +9,9 @@ namespace Restaurant.Domain.Services.Abstract
 {
     public interface IBookTableService
     {
-        List<DiningTableDTO> GetAll();
+        IList<DiningTableDTO> GetTables();
+        IList<int> GetChairsOptions();
+        IList<ReservationDiningTableDTO> GetReservations();
+        IList<DiningTableDTO> GetAvailableTables(int chairs, DateTime startDate, DateTime endDate);
     }
 }
