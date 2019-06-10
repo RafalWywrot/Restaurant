@@ -65,5 +65,9 @@ namespace Restaurant.Domain.Services.Concrete
             return availableTables;
         }
 
+        public void ReserveTable(int id, DateTime startDate, DateTime endDate)
+        {
+            reservationDiningTableRepository.AddReservation(id, startDate, endDate);
+        }
     }
 }

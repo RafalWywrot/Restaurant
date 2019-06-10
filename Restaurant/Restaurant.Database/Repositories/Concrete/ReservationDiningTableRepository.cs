@@ -25,6 +25,22 @@ namespace Restaurant.Database.Repositories.Concrete
                 return session.Query<ReservationDiningTable>().ToList();
             }
         }
-        
+
+        public void AddReservation(int id, DateTime startDate, DateTime endDate)
+        {
+            // how to pass userid into reservarion dining tableS
+            var reservation = new ReservationDiningTable
+            {
+                DiningTable = new DiningTable { Id = id },
+                StartDate = startDate,
+                EndDate = endDate,
+                User = new ApplicationUser { Id= "0de7a44b-8483-4dd4-ac51-b5d989dfb20d" }
+            };
+
+            using (ISession session = _sessionFactory.OpenSession())
+            {
+                session.Save(reservation);
+            }
+        }
     }
 }

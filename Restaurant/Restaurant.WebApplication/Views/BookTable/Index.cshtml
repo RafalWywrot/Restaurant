@@ -66,6 +66,7 @@
                     <tr>
                         <td class="col-md-6">@table.Id</td>
                         <td class="col-md-6">@table.AvailableChairs</td>
+                        <td class="col-md-6">@Html.ActionLink("Rezerwuj", "ReserveTable",  new { id = table.Id, startDate = table.StartDate, endDate = table.EndDate })</td>
                     </tr>
                 }
             </tbody>

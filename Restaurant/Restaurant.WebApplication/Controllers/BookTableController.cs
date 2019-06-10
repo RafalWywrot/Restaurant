@@ -36,7 +36,21 @@ namespace Restaurant.WebApplication.Controllers
             var availableTables = bookTableService.GetAvailableTables(model.SelectedNumberOfChairs, startDate, endDate);
             model.ChairsOptions = Mapper.Map<List<SelectListItem>>(bookTableService.GetChairsOptions());
             model.AvailableTables = Mapper.Map<List<DiningTableViewModel>>(availableTables);
+            foreach (var avalaibleTable in model.AvailableTables)
+            {
+                avalaibleTable.StartDate = startDate;
+                avalaibleTable.EndDate = endDate;
+            }
             return View(model);
+        }
+
+        //add view to confirm reservation and update ReservationDiningTable in HttpPost
+        [HttpGet]
+        public ActionResult ReserveTable(int id, DateTime startDate, DateTime endDate)
+        {
+            bookTableService.ReserveTable(id, startDate, endDate);
+            
+            return RedirectToAction("Index");
         }
     }
 }

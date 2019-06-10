@@ -10,5 +10,6 @@ namespace Restaurant.Database.Repositories.Abstract
     public interface IReservationDiningTableRepository
     {
         IList<ReservationDiningTable> GetAll();
+        void AddReservation(int id, DateTime startDate, DateTime endDate);
     }
 }
