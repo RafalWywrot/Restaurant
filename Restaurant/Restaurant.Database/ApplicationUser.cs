@@ -18,10 +18,12 @@ namespace Restaurant.Database
 {
     public class ApplicationUser : IdentityUser
     {
+        
+        
+
         public virtual string Name { get; set; }
         public virtual string Surname { get; set; }
-        // how to get rid of this id
-        public new virtual string Id { get; set; }
+        
         public virtual async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

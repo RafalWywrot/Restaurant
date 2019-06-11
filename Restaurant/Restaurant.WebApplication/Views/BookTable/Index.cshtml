@@ -44,7 +44,9 @@
             <input type="submit" value="Create" class="btn btn-default" />
         </div>
     </div>
+
 }
+
 @if (Model.AvailableTables != null)
 {
     if (Model.AvailableTables.Count == 0)
@@ -66,7 +68,12 @@
                     <tr>
                         <td class="col-md-6">@table.Id</td>
                         <td class="col-md-6">@table.AvailableChairs</td>
-                        <td class="col-md-6">@Html.ActionLink("Rezerwuj", "ReserveTable",  new { id = table.Id, startDate = table.StartDate, endDate = table.EndDate })</td>
+                        <td class="col-md-6">
+                            @using (Html.BeginForm("ReserveTable", "BookTable", new { tableId = table.Id, startDate = table.StartDate, endDate = table.EndDate }))
+                            {
+                                <input type="submit" value="Rezerwuj" onclick="return confirm('Jesteś pewny czy chcesz zarezerwować stolik dla @table.AvailableChairs osób?');" />
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -90,6 +97,16 @@
         // initialize datepair
         var basicExampleEl = document.getElementById('basicExample');
         var datepair = new Datepair(basicExampleEl);
-    </script>
+    </script>    
+    <script src="~/Scripts/toastr.min.js"></script>
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    @if (TempData["Message"] != null)
+    {
+        <script type="text/javascript">toastr.success("@TempData["Message"]");</script>
+    }
+    @if (TempData["error"] != null)
+    {
+        <script type="text/javascript">toastr.error("@TempData["error"]");</script>
+    }
+}
 
-}  

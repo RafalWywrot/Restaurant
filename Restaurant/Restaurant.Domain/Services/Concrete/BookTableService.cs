@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Restaurant.Database;
 using Restaurant.Database.Entities;
 using Restaurant.Database.Repositories.Abstract;
 using Restaurant.Domain.DTO;
@@ -65,9 +66,9 @@ namespace Restaurant.Domain.Services.Concrete
             return availableTables;
         }
 
-        public void ReserveTable(int id, DateTime startDate, DateTime endDate)
+        public void ReserveTable(int tableId, DateTime startDate, DateTime endDate, ApplicationUser user)
         {
-            reservationDiningTableRepository.AddReservation(id, startDate, endDate);
+            reservationDiningTableRepository.AddReservation(tableId, startDate, endDate, user);
         }
     }
 }

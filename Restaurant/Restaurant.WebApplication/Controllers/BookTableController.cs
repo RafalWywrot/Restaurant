@@ -1,20 +1,23 @@
 ﻿using AutoMapper;
+using Microsoft.AspNet.Identity;
 using Restaurant.Domain.Services.Abstract;
+using Restaurant.WebApplication.Helpers;
 using Restaurant.WebApplication.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Restaurant.WebApplication.Controllers
 {
     public class BookTableController : Controller
     {
-        private IBookTableService bookTableService { get; }
-        public BookTableController(IBookTableService bookTableService)
+        private IBookTableService bookTableService { get; }       
+        private AuthenticationUserManager authenticationUserManager { get; }
+        public BookTableController(IBookTableService bookTableService, AuthenticationUserManager authenticationUserManager)
         {
             this.bookTableService = bookTableService;
+            this.authenticationUserManager = authenticationUserManager;
         }
 
 
@@ -44,12 +47,21 @@ namespace Restaurant.WebApplication.Controllers
             return View(model);
         }
 
-        //add view to confirm reservation and update ReservationDiningTable in HttpPost
-        [HttpGet]
-        public ActionResult ReserveTable(int id, DateTime startDate, DateTime endDate)
+        [HttpPost]
+        public ActionResult ReserveTable(int tableId, DateTime startDate, DateTime endDate)
         {
-            bookTableService.ReserveTable(id, startDate, endDate);
-            
+            var currentUser = authenticationUserManager.Users.First(x => x.Id == User.Identity.GetUserId());
+
+            try
+            {
+                bookTableService.ReserveTable(tableId, startDate, endDate, currentUser);
+                TempData["message"] = "Udało się zarezerwować stolik";
+            }
+            catch (Exception e)
+            {
+                TempData["error"] = "Błąd przy zapisie rezerwacji";
+            }       
+
             return RedirectToAction("Index");
         }
     }
