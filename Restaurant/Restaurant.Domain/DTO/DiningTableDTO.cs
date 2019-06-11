@@ -1,5 +1,6 @@
-﻿namespace Restaurant.Domain.DTO
 ﻿using System;
+
+namespace Restaurant.Domain.DTO
 {
     public class DiningTableDTO
     {
