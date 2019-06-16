@@ -71,7 +71,9 @@
     <Compile Include="DTO\ReservationDiningTableDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Abstract\IBookTableService.cs" />
+    <Compile Include="Services\Abstract\IReservationDiningTableService.cs" />
     <Compile Include="Services\Concrete\BookTableService.cs" />
+    <Compile Include="Services\Concrete\ReservationDiningTableService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
