@@ -26,6 +26,14 @@ namespace Restaurant.Database.Repositories.Concrete
             }
         }
 
+        public List<ReservationDiningTable> GetUserReservations(string userId)
+        {
+            using (ISession session = _sessionFactory.OpenSession())
+            {
+                return session.Query<ReservationDiningTable>().Where(x => x.User.Id == userId).ToList();
+            }
+        }
+
         public void AddReservation(int tableId, DateTime startDate, DateTime endDate, ApplicationUser user)
         {                        
             var reservation = new ReservationDiningTable
@@ -39,6 +47,26 @@ namespace Restaurant.Database.Repositories.Concrete
             using (ISession session = _sessionFactory.OpenSession())
             {
                 session.Save(reservation);
+            }
+        }
+
+        public void DeleteReservation(int reservationId)
+        {
+            using (ISession session = _sessionFactory.OpenSession())
+            {
+                var reservation = session.Query<ReservationDiningTable>().Where(x => x.Id == reservationId).FirstOrDefault();
+
+
+                if (reservation != null)
+                {
+                    session.Delete(reservation);
+                    session.Flush();
+                }
+                else
+                {
+                    throw new KeyNotFoundException("Key not found in database");
+                }
+
             }
         }
     }
