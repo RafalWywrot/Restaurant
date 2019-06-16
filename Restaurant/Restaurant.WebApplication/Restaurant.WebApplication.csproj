@@ -219,6 +219,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookTableController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReservationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -229,6 +230,8 @@
     <Compile Include="Models\Authorization\RegisterViewModel.cs" />
     <Compile Include="Models\DiningTableFormViewModel.cs" />
     <Compile Include="Models\DiningTableViewModel.cs" />
+    <Compile Include="Models\ReservationTableFormViewModel.cs" />
+    <Compile Include="Models\ReservationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
