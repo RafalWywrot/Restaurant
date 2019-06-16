@@ -1,4 +1,5 @@
-﻿using Restaurant.Domain.DTO;
+﻿using Restaurant.Database;
+using Restaurant.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace Restaurant.Domain.Services.Abstract
         IList<int> GetChairsOptions();
         IList<ReservationDiningTableDTO> GetReservations();
         IList<DiningTableDTO> GetAvailableTables(int chairs, DateTime startDate, DateTime endDate);
+        void ReserveTable(int tableId, DateTime startDate, DateTime endDate, ApplicationUser user);
     }
 }

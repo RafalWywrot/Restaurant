@@ -10,5 +10,8 @@ namespace Restaurant.Database.Repositories.Abstract
     public interface IReservationDiningTableRepository
     {
         IList<ReservationDiningTable> GetAll();
+        List<ReservationDiningTable> GetUserReservations(string userId);
+        void AddReservation(int id, DateTime startDate, DateTime endDate, ApplicationUser user);
+        void DeleteReservation(int reservationId);
     }
 }

@@ -8,6 +8,7 @@
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div style="margin: 20px">
     <div class="form-group">
         @Html.LabelFor(model => model.SelectedNumberOfChairs, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -41,10 +42,13 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Znajdź wolne stoliki" class="btn btn-default" />
         </div>
     </div>
+</div>
+
 }
+
 @if (Model.AvailableTables != null)
 {
     if (Model.AvailableTables.Count == 0)
@@ -53,19 +57,26 @@
     }
     else
     {
-        <table class="table table-condensed">
+        <table class="table table-condensed" style="margin: 20px">
             <thead>
                 <tr>
-                    <th class="col-md-6">id</th>
-                    <th class="col-md-6">ilosc miejsc</th>
+                    <th class="col-sm-4">Nr stolika</th>
+                    <th class="col-sm-4">Ilość miejsc</th>
+                    <th class="col-sm-4"></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var table in Model.AvailableTables)
                 {
                     <tr>
-                        <td class="col-md-6">@table.Id</td>
-                        <td class="col-md-6">@table.AvailableChairs</td>
+                        <td class="col-sm-4">@table.Id</td>
+                        <td class="col-sm-4">@table.AvailableChairs</td>
+                        <td class="col-sm-4">
+                            @using (Html.BeginForm("ReserveTable", "BookTable", new { tableId = table.Id, startDate = table.StartDate, endDate = table.EndDate }))
+                            {
+                                <input class="btn btn-default" type="submit" value="Rezerwuj" onclick="return confirm('Jesteś pewny czy chcesz zarezerwować stolik dla @table.AvailableChairs osób?');" />
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -89,6 +100,16 @@
         // initialize datepair
         var basicExampleEl = document.getElementById('basicExample');
         var datepair = new Datepair(basicExampleEl);
-    </script>
+    </script>    
+    <script src="~/Scripts/toastr.min.js"></script>
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+    @if (TempData["Message"] != null)
+    {
+        <script type="text/javascript">toastr.success("@TempData["Message"]");</script>
+    }
+    @if (TempData["error"] != null)
+    {
+        <script type="text/javascript">toastr.error("@TempData["error"]");</script>
+    }
+}
 
-}  

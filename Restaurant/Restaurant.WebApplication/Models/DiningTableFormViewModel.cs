@@ -10,7 +10,7 @@ namespace Restaurant.WebApplication.Models
     public class DiningTableFormViewModel
     {
         [Required]
-        [Display(Name = "Liczba stolików")]
+        [Display(Name = "Liczba miejsc")]
         public int SelectedNumberOfChairs { get; set; }
         public IEnumerable<SelectListItem> ChairsOptions { get; set; }
         [Required]
