@@ -46,21 +46,7 @@
 }
 
 
-@section Scripts {
-    <script type="text/javascript">
-        $('#basicExample .time').timepicker({
-            'showDuration': true,
-            'timeFormat': 'g:ia'
-        });
-
-        $('#basicExample .date').datepicker({
-            'format': 'yyyy-MM-dd',
-            'autoclose': true
-        });
-        // initialize datepair
-        var basicExampleEl = document.getElementById('basicExample');
-        var datepair = new Datepair(basicExampleEl);
-    </script>
+@section Scripts {   
 
     <script src="~/Scripts/toastr.min.js"></script>
     <link href="~/Content/toastr.min.css" rel="stylesheet" />
