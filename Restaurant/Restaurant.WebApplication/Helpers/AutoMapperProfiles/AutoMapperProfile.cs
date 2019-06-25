@@ -18,6 +18,7 @@ namespace Restaurant.WebApplication.Helpers.AutoMapperProfiles
             CreateMap<DTO.DiningTableDTO, ViewModels.DiningTableViewModel>().ReverseMap();
             CreateMap<Entities.ReservationDiningTable, DTO.ReservationDiningTableDTO>().ReverseMap();
             CreateMap<DTO.ReservationDiningTableDTO, ViewModels.ReservationTableFormViewModel>().ReverseMap();
+            CreateMap<Entities.Menu, DTO.MenuDTO>().ReverseMap();
             CreateMap<int, SelectListItem>()
                 .ForMember(
                     dest => dest.Value,
