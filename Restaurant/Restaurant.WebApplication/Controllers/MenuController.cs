@@ -23,7 +23,7 @@ namespace Restaurant.WebApplication.Controllers
         public ActionResult Index()
         {
             var menu = menuService.Get();
-            return View();
+            return View(Mapper.Map<List<OrderElementViewModel>>(menu));
         }
     }
 }
