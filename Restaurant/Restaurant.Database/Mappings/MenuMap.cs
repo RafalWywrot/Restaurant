@@ -10,6 +10,7 @@ namespace Restaurant.Database.Mappings
             Table("Menu");
             Id(x => x.Id);
             Map(x => x.Name, "Name").Not.Nullable();
+            Map(x => x.Price, "Price");
         }
     }
 }
