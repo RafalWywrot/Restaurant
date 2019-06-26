@@ -22,6 +22,16 @@ namespace Restaurant.WebApplication.Helpers.AutoMapperProfiles
             CreateMap<DTO.MenuDTO, ViewModels.OrderElementViewModel>()
                 .BeforeMap((s, d) => d.Amount = 1);
 
+            CreateMap<Entities.Order, DTO.OrderDTO>()
+                .ReverseMap()
+                .AfterMap((src, dest) =>
+                {
+                    foreach (var i in dest.OrderItems)
+                        i.OrderParent = dest;
+                });
+            
+            CreateMap<Entities.OrderItem, DTO.OrderItemDTO>().ReverseMap();
+
             CreateMap<int, SelectListItem>()
                 .ForMember(
                     dest => dest.Value,

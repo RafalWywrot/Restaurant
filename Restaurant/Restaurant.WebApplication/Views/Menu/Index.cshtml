@@ -3,10 +3,9 @@
 @{
     ViewBag.Title = "Index";
 }
+
 <div class="row">
     <div class="col-md-4">
-
-
         <table class="table">
             <tr>
                 <th>
@@ -15,22 +14,12 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Amount)
                 </th>
-                <th></th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
             </tr>
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td class="col-md-5">
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td class="col-md-3">
-                        @Html.TextBoxFor(modelItem => item.Amount, new { @class = "form-control" })
-                    </td>
-                    <td class="col-md-4">
-                        <button type="button" class="btn btn-primary">Dodaj</button>
-                    </td>
-                </tr>
+                @Html.Partial("_OrderElement", item)
             }
         </table>
     </div>
