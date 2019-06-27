@@ -20,7 +20,7 @@ namespace Restaurant.WebApplication.Controllers
             var orders = orderService.Get();
             return View(orders);
         }
-        public ActionResult Add(OrderElementViewModel order)
+        public JsonResult Add(OrderElementViewModel order)
         {
             var orderDetails = new OrderItemDTO()
             {
@@ -28,7 +28,7 @@ namespace Restaurant.WebApplication.Controllers
                 Quantity = order.Amount
             };
             orderService.Add(orderDetails, GetUser());
-            return RedirectToAction("Index", "Menu");
+            return Json(new { });
         }
         [HttpPost]
         public JsonResult Remove(int orderItemId)

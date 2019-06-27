@@ -24,3 +24,31 @@
         </table>
     </div>
 </div>
+@section Scripts {
+    <script>
+        $(".add-order").click(function () {
+            var row = $(this).closest("tr");
+            var orderModel = {}; Id
+            orderModel.Id = row.find('#Id').val();
+            orderModel.Amount = row.find('#Amount').val();
+            $.ajax({
+                url: '@Url.Action("Add", "Order")',
+                type: "POST",
+                contentType: 'application/json',
+                datatype: 'json',
+                data: JSON.stringify({
+                    order: orderModel
+                }),
+                success: function (response) { // remove buttons and replace by message response by server
+                    if (response) {
+                        alert('Ok');
+                    }
+                    else {
+                        alert('no response');
+                    }
+                },
+                error: function (xhr) { alert('big error') }
+            });
+    });
+    </script>
+}
