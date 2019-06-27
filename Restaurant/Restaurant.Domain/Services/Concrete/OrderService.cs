@@ -29,13 +29,13 @@ namespace Restaurant.Domain.Services.Concrete
 
         public void Add(OrderItemDTO order, ApplicationUser user)
         {
-            var parentOrder = orderRepository.GetAll().Where(x => x.User.Name == user.Name && x.User.Surname == user.Surname && x.Status == true).FirstOrDefault();
+            var parentOrder = orderRepository.GetAll().Where(x => x.User.Name == user.Name && x.User.Surname == user.Surname && x.Status == false).FirstOrDefault();
             if (parentOrder == null)
             {
                 var newOrder = new OrderDTO()
                 {
                     OrderDate = DateTime.Now,
-                    Status = true,
+                    Status = false,
                     User = user,
                     PickupDate = DateTime.Now,
                     OrderItems = new List<OrderItemDTO>() { order }
