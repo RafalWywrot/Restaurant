@@ -20,18 +20,21 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PickupDate)
-            </td>
-            <td></td>
-        </tr>
+    <tr>
+        @Html.HiddenFor(x => item.Id, new { @class = "orderId" })
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PickupDate)
+        </td>
+        <td>
+            <input type="button" value="Zatwierdź" class="btn btn-success confirm-order" />
+        </td>
+    </tr>
 
         <tr>
             <th style="padding-left: 20px;">
@@ -61,6 +64,49 @@
 </table>
 
 @section Scripts {
+    <script>
+        $(".confirm-order").click(function () {
+            var row = $(this).closest("tr");
+            var options =
+            {
+                DeclineButtonClasses: "btn btn-default",
+                ConfimButtonClasses: "btn btn-default margin-left-lg"
+            };
+            var confirmDialog = new ConfirmDialog(options);
+            confirmDialog.ShowDialog(
+                "Potwierdz zamowienie",
+                "Czy chcesz zatwierdzic to zamówienie?",
+                "Yes",
+                "No",
+                function () {
+                    $.ajax({
+                        url: '@Url.Action("Confirm", "Order")',
+                        type: "POST",
+                        contentType: 'application/json',
+                        datatype: 'json',
+                        data: JSON.stringify({
+                            'orderId': row.find('.orderId').val()
+                        }),
+                        success: function (response) { // remove buttons and replace by message response by server
+                            if (response) {
+                                if (row.siblings().length > 0) {
+                                    location.reload();
+                                }
+                                else {
+                                    row.remove();
+                                }
+                            }
+                            else {
+                                alert('no response');
+                            }
+                        },
+                        error: function (xhr) { alert('big error') }
+                    });
+                },
+                function () { },
+            );
+        });
+    </script>
     <script>
         $(".remove-order").click(function () {
             var row = $(this).closest("tr");
@@ -103,5 +149,5 @@
                 function () { }
             );
     });
-    </script>
+    </script>    
 }
