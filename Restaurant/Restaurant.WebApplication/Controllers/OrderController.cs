@@ -43,5 +43,13 @@ namespace Restaurant.WebApplication.Controllers
             orderService.Confirm(orderId);
             return Json(new { Ok = true });
         }
+
+        [HttpPost]
+        public JsonResult Cancel(int orderId)
+        {
+            orderService.Cancel(orderId);
+            return Json(new { Ok = true });
+        }
+
     }
 }
