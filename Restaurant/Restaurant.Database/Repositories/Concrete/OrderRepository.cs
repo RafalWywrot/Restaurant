@@ -46,7 +46,15 @@ namespace Restaurant.Database.Repositories.Concrete
                 {
                     transaction.Begin();
                     var orderDAO = session.Query<Order>().Where(x => x.Id == orderItem.OrderParent.Id).FirstOrDefault();
-                    orderDAO.OrderItems.Add(orderItem);
+                    var alredyExist = orderDAO.OrderItems.Where(x => x.Menu.Id == orderItem.Menu.Id).FirstOrDefault();
+                    if (alredyExist != null)
+                    {
+                        alredyExist.Quantity += orderItem.Quantity;
+                    }
+                    else
+                    {
+                        orderDAO.OrderItems.Add(orderItem);
+                    }
                     session.Update(orderDAO);
                     transaction.Commit();
                 }
