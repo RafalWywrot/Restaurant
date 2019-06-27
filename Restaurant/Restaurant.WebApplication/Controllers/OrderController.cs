@@ -36,5 +36,12 @@ namespace Restaurant.WebApplication.Controllers
             orderService.Remove(orderItemId);
             return Json(new { Ok = true });
         }
+
+        [HttpPost]
+        public JsonResult Confirm(int orderId)
+        {
+            orderService.Confirm(orderId);
+            return Json(new { Ok = true });
+        }
     }
 }
