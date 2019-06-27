@@ -20,21 +20,28 @@
 
     @foreach (var item in Model)
     {
-    <tr>
-        @Html.HiddenFor(x => item.Id, new { @class = "orderId" })
-        <td>
-            @Html.DisplayFor(modelItem => item.OrderDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PickupDate)
-        </td>
-        <td>
-            <input type="button" value="Zatwierdź" class="btn btn-success confirm-order" />
-        </td>
-    </tr>
+        <tr>
+            @Html.HiddenFor(x => item.Id, new { @class = "orderId" })
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickupDate)
+            </td>
+            <td>
+                @if (item.Status == false)
+                {
+                    <input type="button" value="Zatwierdź" class="btn btn-success confirm-order" />
+                }
+                else
+                {
+                    <input type="button" value="Usuń" class="btn btn-danger remove-order" />
+                }
+            </td>
+        </tr>
 
         <tr>
             <th style="padding-left: 20px;">
@@ -55,8 +62,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => orderItem.Quantity)
                 </td>
+
                 <td>
-                    <input type="button" value="Usuń" class="btn btn-danger remove-order" />
+                    @if (item.Status == false)
+                    {
+                        <input type="button" value="Usuń" class="btn btn-danger remove-order-item" />
+                    }
                 </td>
             </tr>
         }
@@ -64,6 +75,49 @@
 </table>
 
 @section Scripts {
+    <script>
+        $(".remove-order").click(function () {
+            var row = $(this).closest("tr");
+            var options =
+            {
+                DeclineButtonClasses: "btn btn-default",
+                ConfimButtonClasses: "btn btn-default margin-left-lg"
+            };
+            var confirmDialog = new ConfirmDialog(options);
+            confirmDialog.ShowDialog(
+                "Potwierdz usuniécie zamówienia",
+                "Czy chcesz usunąć to zamówienie?",
+                "Yes",
+                "No",
+                function () {
+                    $.ajax({
+                        url: '@Url.Action("Cancel", "Order")',
+                        type: "POST",
+                        contentType: 'application/json',
+                        datatype: 'json',
+                        data: JSON.stringify({
+                            'orderId': row.find('.orderId').val()
+                        }),
+                        success: function (response) { // remove buttons and replace by message response by server
+                            if (response) {
+                                if (row.siblings().length > 0) {
+                                    location.reload();
+                                }
+                                else {
+                                    row.remove();
+                                }
+                            }
+                            else {
+                                alert('no response');
+                            }
+                        },
+                        error: function (xhr) { alert('big error') }
+                    });
+                },
+                function () { },
+            );
+        });
+    </script>
     <script>
         $(".confirm-order").click(function () {
             var row = $(this).closest("tr");
@@ -108,7 +162,7 @@
         });
     </script>
     <script>
-        $(".remove-order").click(function () {
+        $(".remove-order-item").click(function () {
             var row = $(this).closest("tr");
             var options =
             {
@@ -149,5 +203,5 @@
                 function () { }
             );
     });
-    </script>    
+    </script>
 }
