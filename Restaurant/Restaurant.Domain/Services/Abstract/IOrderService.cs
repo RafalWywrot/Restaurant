@@ -9,5 +9,6 @@ namespace Restaurant.Domain.Services.Abstract
         void Add(OrderItemDTO order, ApplicationUser user);
         void Remove(int orderItemId);
         void Confirm(int orderId);
+        void Cancel(int orderId);
     }
 }

@@ -101,5 +101,22 @@ namespace Restaurant.Database.Repositories.Concrete
                 }
             }
         }
+
+        public void Cancel(int orderId)
+        {
+            using (ISession session = _sessionFactory.OpenSession())
+            {
+                using (var transaction = session.Transaction)
+                {
+                    transaction.Begin();
+                    var order = session.Query<Order>().Where(x => x.Id == orderId).FirstOrDefault();
+                    if (order != null)
+                    {
+                        session.Delete(order);                        
+                    }
+                    transaction.Commit();
+                }
+            }
+        }
     }
 }

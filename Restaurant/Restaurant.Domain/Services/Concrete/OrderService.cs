@@ -57,5 +57,10 @@ namespace Restaurant.Domain.Services.Concrete
         {
             orderRepository.Confirm(orderId);
         }
+
+        public void Cancel(int orderId)
+        {
+            orderRepository.Cancel(orderId);
+        }
     }
 }
