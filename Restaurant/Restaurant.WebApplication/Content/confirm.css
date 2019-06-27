@@ -1,0 +1,54 @@
+﻿.confirm {
+    position: fixed;
+    width: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999999;
+}
+
+.confirm-popup {
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,.2);
+    margin: 0 auto;
+    border-radius: 3px;
+    overflow: auto;
+}
+
+.confirm-xs {
+    max-width: 400px;
+    width: 20%;
+}
+
+.confirm-md {
+    max-width: 650px;
+    width: 30%;
+}
+
+.confirm-lg {
+    max-width: 850px;
+    width: 40%;
+}
+
+.confirm-header {
+    padding: 25px 15px;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 24px;
+}
+
+    .confirm-header p {
+        margin: 0;
+    }
+
+.confirm-title {
+    font-weight: bold;
+}
+
+.confirm-body,
+.confirm-popup-footer {
+    padding: 25px 15px;
+}
+
+    .confirm-popup-footer button {
+        margin-bottom: 0;
+    }

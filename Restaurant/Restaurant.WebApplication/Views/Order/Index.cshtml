@@ -45,6 +45,7 @@
         foreach (var orderItem in item.OrderItems)
         {
             <tr style="border: none;">
+                @Html.HiddenFor(x => orderItem.Id, new { @class = "orderItemId" })
                 <td style="padding-left: 20px;">
                     @Html.DisplayFor(modelItem => orderItem.Menu.Name)
                 </td>
@@ -52,13 +53,55 @@
                     @Html.DisplayFor(modelItem => orderItem.Quantity)
                 </td>
                 <td>
-                    @using (Html.BeginForm("Remove", "Order", new { orderItemId = orderItem.Id }, FormMethod.Post, new { }))
-                    {
-                        <input type="submit" value="Usuń" class="btn btn-danger" />
-                    }
+                    <input type="button" value="Usuń" class="btn btn-danger remove-order" />
                 </td>
             </tr>
         }
     }
 </table>
 
+@section Scripts {
+    <script>
+        $(".remove-order").click(function () {
+            var row = $(this).closest("tr");
+            var options =
+            {
+                DeclineButtonClasses: "btn btn-default",
+                ConfimButtonClasses: "btn btn-default margin-left-lg"
+            };
+            var confirmDialog = new ConfirmDialog(options);
+            confirmDialog.ShowDialog(
+                "text 1",
+                "Content",
+                "Yes",
+                "No",
+                function () {
+                    $.ajax({
+                        url: '@Url.Action("Remove", "Order")',
+                        type: "POST",
+                        contentType: 'application/json',
+                        datatype: 'json',
+                        data: JSON.stringify({
+                            'orderItemId': row.find('.orderItemId').val()
+                        }),
+                        success: function (response) { // remove buttons and replace by message response by server
+                            if (response) {
+                                if (row.siblings().length > 0) {
+                                    location.reload();
+                                }
+                                else {
+                                    row.remove();
+                                }
+                            }
+                            else {
+                                alert('no response');
+                            }
+                        },
+                        error: function (xhr) { alert('big error') }
+                    });
+                },
+                function () { }
+            );
+    });
+    </script>
+}

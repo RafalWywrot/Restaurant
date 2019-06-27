@@ -30,10 +30,11 @@ namespace Restaurant.WebApplication.Controllers
             orderService.Add(orderDetails, GetUser());
             return RedirectToAction("Index", "Menu");
         }
-        public ActionResult Remove(int orderItemId)
+        [HttpPost]
+        public JsonResult Remove(int orderItemId)
         {
             orderService.Remove(orderItemId);
-            return RedirectToAction("Index");
+            return Json(new { Ok = true });
         }
     }
 }
