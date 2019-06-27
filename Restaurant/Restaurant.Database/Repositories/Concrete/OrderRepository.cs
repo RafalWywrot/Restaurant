@@ -83,5 +83,23 @@ namespace Restaurant.Database.Repositories.Concrete
                 }
             }
         }
+
+        public void Confirm(int orderId)
+        {
+            using (ISession session = _sessionFactory.OpenSession())
+            {
+                using (var transaction = session.Transaction)
+                {
+                    transaction.Begin();
+                    var order = session.Query<Order>().Where(x => x.Id == orderId).FirstOrDefault();
+                    if (order != null)
+                    {
+                        order.Status = true;
+                        session.Update(order);                    
+                    }                    
+                    transaction.Commit();
+                }
+            }
+        }
     }
 }

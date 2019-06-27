@@ -9,5 +9,6 @@ namespace Restaurant.Database.Repositories.Abstract
         void InitializeOrder(Order order);
         void AddOrderItem(OrderItem orderItem);
         void Remove(int orderItemId);
+        void Confirm(int orderId);
     }
 }

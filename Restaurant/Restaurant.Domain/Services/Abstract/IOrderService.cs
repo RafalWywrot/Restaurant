@@ -8,5 +8,6 @@ namespace Restaurant.Domain.Services.Abstract
         IList<OrderDTO> Get();
         void Add(OrderItemDTO order, ApplicationUser user);
         void Remove(int orderItemId);
+        void Confirm(int orderId);
     }
 }
