@@ -1,19 +1,24 @@
 ﻿@model Restaurant.WebApplication.Models.OrderElementViewModel
 
 <tr>
-
     @Html.HiddenFor(x => x.Id)
-    <td class="col-md-5">
-        @Html.DisplayFor(modelItem => modelItem.Name)
+    <td class="">
+        <div class="list-group">
+            <div class="">
+                <h4 class="list-group-item-heading"><strong>@Html.DisplayFor(modelItem => modelItem.Name)</strong></h4>
+                <p class="list-group-item-text"><small>cebula, czosnek, ogórek kwaszony, boczek, kabanos</small></p>
+            </div>
+        </div>
+        @*@Html.DisplayFor(modelItem => modelItem.Name)*@
     </td>
-    <td class="col-md-3">
+    <td class="col-md-1">
         @Html.TextBoxFor(modelItem => modelItem.Amount, new { @class = "form-control" })
     </td>
-    <td class="col-md-3">
-        @Html.DisplayFor(modelItem => modelItem.Price, new { @class = "form-control" })
+    <td class="">
+        @string.Format("{0} zł", Model.Price)
     </td>
-    <td class="col-md-4">
-        <button type="button" class="btn btn-primary add-order">Dodaj</button>
+    <td class="">
+        <button type="button" class="btn btn-primary right add-order">Dodaj</button>
     </td>
 </tr>
 
