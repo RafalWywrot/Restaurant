@@ -22,3 +22,19 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.margin-left-xs {
+    margin-left: 5px;
+}
+
+.margin-left-lg {
+    margin-left: 20px !important;
+}
+
+.font-size-md {
+    font-size: 1.2em;
+}
+
+.btn-big-lg {
+    padding: 12px 20px
+}

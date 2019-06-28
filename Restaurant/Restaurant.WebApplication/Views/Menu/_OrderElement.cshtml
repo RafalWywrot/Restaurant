@@ -1,0 +1,19 @@
+﻿@model Restaurant.WebApplication.Models.OrderElementViewModel
+
+<tr>
+
+    @Html.HiddenFor(x => x.Id)
+    <td class="col-md-5">
+        @Html.DisplayFor(modelItem => modelItem.Name)
+    </td>
+    <td class="col-md-3">
+        @Html.TextBoxFor(modelItem => modelItem.Amount, new { @class = "form-control" })
+    </td>
+    <td class="col-md-3">
+        @Html.DisplayFor(modelItem => modelItem.Price, new { @class = "form-control" })
+    </td>
+    <td class="col-md-4">
+        <button type="button" class="btn btn-primary add-order">Dodaj</button>
+    </td>
+</tr>
+

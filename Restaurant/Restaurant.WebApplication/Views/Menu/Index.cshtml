@@ -3,10 +3,9 @@
 @{
     ViewBag.Title = "Index";
 }
+
 <div class="row">
     <div class="col-md-4">
-
-
         <table class="table">
             <tr>
                 <th>
@@ -15,23 +14,44 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Amount)
                 </th>
-                <th></th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
             </tr>
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td class="col-md-5">
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td class="col-md-3">
-                        @Html.TextBoxFor(modelItem => item.Amount, new { @class = "form-control" })
-                    </td>
-                    <td class="col-md-4">
-                        <button type="button" class="btn btn-primary">Dodaj</button>
-                    </td>
-                </tr>
+                @Html.Partial("_OrderElement", item)
             }
         </table>
     </div>
 </div>
+@section Scripts {
+    <script src="~/Scripts/toastr.min.js"></script>
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+
+    <script>
+        $(".add-order").click(function () {
+            var row = $(this).closest("tr");
+            var orderModel = {}; Id
+            orderModel.Id = row.find('#Id').val();
+            orderModel.Amount = row.find('#Amount').val();
+            $.ajax({
+                url: '@Url.Action("Add", "Order")',
+                type: "POST",
+                contentType: 'application/json',
+                datatype: 'json',
+                data: JSON.stringify({
+                    order: orderModel
+                }),
+                success: function (response) { // remove buttons and replace by message response by server
+                    if (response) {
+                        toastr.success('Success @Html.ActionLink("Idz do zamówien", "Index", "Order", null, new { @class = "btn btn-primary" })');
+                    }
+                    else {
+                        alert('no response');
+                    }
+                },
+                error: function (xhr) { alert('big error') }
+            });
+    });
+    </script>
+}

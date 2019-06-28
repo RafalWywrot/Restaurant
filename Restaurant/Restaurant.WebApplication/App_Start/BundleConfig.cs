@@ -24,12 +24,14 @@ namespace Restaurant.WebApplication
                       "~/Scripts/respond.js",
                       "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/datepair.js",
+                      "~/Scripts/confirm.js",
                       "~/Scripts/jquery.timepicker.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css", 
                       "~/Content/site.css",
                       "~/Content/bootstrap-datepicker.css",
+                      "~/Content/confirm.css",
                       "~/Content/jquery.timepicker.css"));
         }
     }

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Restaurant.Database.Entities
+﻿namespace Restaurant.Database.Entities
 {
     public class Menu
     {
         public virtual int Id { get; set; }
         public virtual string Name { get; set; }
+        public virtual decimal Price { get; set; }
     }
 }

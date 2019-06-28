@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Restaurant.WebApplication.Models
 {
@@ -12,5 +8,7 @@ namespace Restaurant.WebApplication.Models
         [Required]
         [Display(Name = "Nazwa")]
         public string Name { get; set; }
+        [Display(Name = "Cena")]
+        public decimal Price { get; set; }
     }
 }
