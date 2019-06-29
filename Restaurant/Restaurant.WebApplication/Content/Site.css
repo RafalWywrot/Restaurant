@@ -63,3 +63,33 @@ textarea {
     opacity: 0.8;
     border-radius: 10px;
 }
+
+.navbar.navbar-inverse.navbar-fixed-top {
+    background-color: gainsboro;
+    opacity: 0.9;
+}
+
+.navbar-inverse .navbar-header a.navbar-brand {
+    color: dimgrey;
+    font-weight: 900;
+    font-size: 32px;
+}
+
+.navbar-inverse .navbar-header a.navbar-brand:hover {
+    color: whitesmoke;
+    font-weight: 900;
+    font-size: 32px;
+}
+
+.navbar-collapse.collapse .nav.navbar-nav.navbar-right a {
+    color: dimgrey;
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.navbar-collapse.collapse .nav.navbar-nav.navbar-right a:hover {
+    color: whitesmoke;
+    font-weight: 900;
+    font-size: 18px;
+}
+
