@@ -10,5 +10,6 @@ namespace Restaurant.WebApplication.Models
         public string Name { get; set; }
         [Display(Name = "Cena")]
         public decimal Price { get; set; }
+        public string Ingredients { get; set; }
     }
 }
