@@ -8,7 +8,10 @@
     @Html.AntiForgeryToken()
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-<div style="margin: 20px">
+<div class="form-container">
+    <div class="form-title">
+        <span>Znajdź stolik</span>
+    </div>
     <div class="form-group">
         @Html.LabelFor(model => model.SelectedNumberOfChairs, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
@@ -53,35 +56,49 @@
 {
     if (Model.AvailableTables.Count == 0)
     {
-        <text>no available tables</text>
+        <div class="table-container">
+            <div class="form-title">
+                <span>Brak wolnych stolików w tym terminie</span>
+            </div>
+        </div>
     }
     else
     {
-        <table class="table table-condensed" style="margin: 20px">
-            <thead>
-                <tr>
-                    <th class="col-sm-4">Nr stolika</th>
-                    <th class="col-sm-4">Ilość miejsc</th>
-                    <th class="col-sm-4"></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var table in Model.AvailableTables)
-                {
-                    <tr>
-                        <td class="col-sm-4">@table.Id</td>
-                        <td class="col-sm-4">@table.AvailableChairs</td>
-                        <td class="col-sm-4">
-                            @using (Html.BeginForm("ReserveTable", "BookTable", new { tableId = table.Id, startDate = table.StartDate, endDate = table.EndDate }))
-                            {
-                                <input class="btn btn-default" type="submit" value="Rezerwuj" onclick="return confirm('Jesteś pewny czy chcesz zarezerwować stolik dla @table.AvailableChairs osób?');" />
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        <div class="table-container">
+            <div class="form-title">
+                <span>Wybierz swój stolik</span>
+            </div>
 
+            @foreach (var table in Model.AvailableTables)
+            {
+                <div class="table-reservation-container">
+                    <div class="table-reservation">
+                        <span class="table-description">
+                            Nr stolika:
+                        </span>
+                        <span class="table-number">
+                            @table.Number
+                        </span>
+                    </div>
+
+                    <div class="table-reservation">
+                        <span class="table-description">
+                            Ilość miejsc:
+                        </span>
+                        <span class="table-number">
+                            @table.AvailableChairs
+                        </span>
+                    </div>
+                    <div>
+                        @using (Html.BeginForm("ReserveTable", "BookTable", new { tableId = table.Id, startDate = table.StartDate, endDate = table.EndDate }))
+                        {
+                            <input class="btn btn-default" type="submit" value="Rezerwuj" 
+                                   onclick="return confirm('Jesteś pewny czy chcesz zarezerwować stolik dla @table.AvailableChairs osób?');" />
+                        }
+                    </div>
+                </div>
+            }
+        </div>
     }
 }
 

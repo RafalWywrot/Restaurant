@@ -7,41 +7,50 @@
 {
     if (Model.Reservations.Count == 0)
     {
-        <text>no available reservations</text>
+        <div class="table-container">
+            <div class="form-title">
+                <span>Brak rezerwacji</span>
+            </div>
+        </div>
     }
     else
     {
-        <table class="table table-condensed" style="margin:20px;">
-            <thead>
-                <tr>
-                    <th class="col-sm-2">Nr stolika</th>
-                    <th class="col-sm-2">Ilość miejsc</th>
-                    <th class="col-sm-2">Początek rezerwacji</th>
-                    <th class="col-sm-2">Koniec rezerwacji</th>
-                    <th class="col-sm-2"></th>
+        <div class="table-container">
+            <div class="form-title">
+                <span>Twoje rezerwacje stolików</span>
+            </div>
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var reservation in Model.Reservations)
-                {
+            <table class="table table-condensed" style="margin:20px;">
+                <thead>
                     <tr>
-                        <td class="col-sm-2">@reservation.DiningTable.Id</td>
-                        <td class="col-sm-2">@reservation.DiningTable.AvailableChairs</td>
-                        <td class="col-sm-2">@reservation.StartDate</td>
-                        <td class="col-sm-2">@reservation.EndDate</td>
+                        <th class="col-sm-2">Nr stolika</th>
+                        <th class="col-sm-2">Ilość miejsc</th>
+                        <th class="col-sm-2">Początek rezerwacji</th>
+                        <th class="col-sm-2">Koniec rezerwacji</th>
+                        <th class="col-sm-2"></th>
 
-                        <td class="col-sm-2">
-                            @using (Html.BeginForm("CancelReservation", "Reservations", new { reservationId = reservation.Id, startDate = reservation.StartDate, endDate = reservation.EndDate }))
-                            {
-                                <input class="btn btn-primary" type="submit" value="Anuluj" onclick="return confirm('Jesteś pewny czy chcesz anulować rezerwację stolika dla @reservation.DiningTable.AvailableChairs osób?');" />
-                            }
-                        </td>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var reservation in Model.Reservations)
+                    {
+                        <tr>
+                            <td class="col-sm-2">@reservation.DiningTable.Id</td>
+                            <td class="col-sm-2">@reservation.DiningTable.AvailableChairs</td>
+                            <td class="col-sm-2">@reservation.StartDate</td>
+                            <td class="col-sm-2">@reservation.EndDate</td>
 
+                            <td class="col-sm-2">
+                                @using (Html.BeginForm("CancelReservation", "Reservations", new { reservationId = reservation.Id, startDate = reservation.StartDate, endDate = reservation.EndDate }))
+                                {
+                                    <input class="btn btn-primary" type="submit" value="Anuluj" onclick="return confirm('Jesteś pewny czy chcesz anulować rezerwację stolika dla @reservation.DiningTable.AvailableChairs osób?');" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 }
 

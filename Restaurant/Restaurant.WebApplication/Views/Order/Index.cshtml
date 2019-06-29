@@ -4,116 +4,129 @@
 }
 @if (Model == null)
 {
-    <p>no orders</p>
+    <div class="table-container">
+        <div class="form-title">
+            <span>Brak zamówień</span>
+        </div>
+    </div>
 }
 else
 {
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            @Html.HiddenFor(x => Model.Id, new { @id = "mainOrderId" })
-            Data zamówienia:  @Model.OrderDate
-            @if (Model.Status == false)
-            {
-                <input type="button" value="Zatwierdź" class="btn btn-success confirm-order" />
-            }
-            else
-            {
-                <input type="button" value="Usuń" class="btn btn-danger remove-order" />
-            }
+    if (Model.Status == false)
+    {
+        <div class="table-container">
+            <div>
+                <span class="table-description">Data zamówienia:</span>
+                <span>
+                    @Html.HiddenFor(x => Model.Id, new { @id = "mainOrderId" })
+                    @Model.OrderDate
+                </span>
+                <input type="button" value="Zatwierdź" class="btn btn-success confirm-order button-confirm-order" />
+            </div>
         </div>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th style="padding-left: 20px;">
-                        @Html.Name("Nazwa")
-                    </th>
-                    <th>
-                        @Html.Name("Ilość")
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var orderItem in Model.OrderItems)
-                {
-                    <tr style="border: none;">
-                        @Html.HiddenFor(x => orderItem.Id, new { @class = "orderItemId" })
-                        <td style="padding-left: 20px;">
-                            @Html.DisplayFor(modelItem => orderItem.Menu.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => orderItem.Quantity)
-                        </td>
-                        <td>
-                            @if (Model.Status == false)
-                            {
-                                <input type="button" value="Usuń" class="btn btn-danger remove-order-item" />
-                            }
-                        </td>
+        <div class="table-container">
+            <div class="form-title">
+                <span>Szczegóły zamówienia</span>
+            </div>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th style="padding-left: 20px;">
+                            @Html.Name("Nazwa")
+                        </th>
+                        <th>
+                            @Html.Name("Ilość")
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-
-
-    @*<tr>
-                    @Html.HiddenFor(x => item.Id, new { @class = "orderId" })
-                    <td>
-                        @Html.DisplayFor(modelItem => Model.OrderDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PickupDate)
-                    </td>
-                    <td>
-                        if (item.Status == false)
-                        {
-                            <input type="button" value="Zatwierdź" class="btn btn-success confirm-order" />
-                        }
-                        else
-                        {
-                            <input type="button" value="Usuń" class="btn btn-danger remove-order" />
-                        }
-                    </td>
-                </tr>
-
-                <tr>
-                    <th style="padding-left: 20px;">
-                        @Html.Name("Nazwa")
-                    </th>
-                    <th>
-                        @Html.Name("Ilość")
-                    </th>
-                    <th></th>
-                </tr>
-                foreach (var orderItem in item.OrderItems)
-                {
-                    <tr style="border: none;">
-                        @Html.HiddenFor(x => orderItem.Id, new { @class = "orderItemId" })
-                        <td style="padding-left: 20px;">
-                            @Html.DisplayFor(modelItem => orderItem.Menu.Name)
+                </thead>
+                <tbody>
+                    @foreach (var orderItem in Model.OrderItems)
+                    {
+                        <tr style="border: none;">
+                            @Html.HiddenFor(x => orderItem.Id, new { @class = "orderItemId" })
+                            <td style="padding-left: 20px;">
+                                @Html.DisplayFor(modelItem => orderItem.Menu.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => orderItem.Quantity)
+                            </td>
+                            <td>
+                                @if (Model.Status == false)
+                                {
+                                    <input type="button" value="Usuń" class="btn btn-danger remove-order-item" />
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="table-container">
+            <div class="form-title">
+                <span>Brak zamówień</span>
+            </div>
+        </div>
+    }
+        @*<tr>
+                        @Html.HiddenFor(x => item.Id, new { @class = "orderId" })
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.OrderDate)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => orderItem.Quantity)
+                            @Html.DisplayFor(modelItem => item.Status)
                         </td>
-
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PickupDate)
+                        </td>
                         <td>
                             if (item.Status == false)
                             {
-                                <input type="button" value="Usuń" class="btn btn-danger remove-order-item" />
+                                <input type="button" value="Zatwierdź" class="btn btn-success confirm-order" />
+                            }
+                            else
+                            {
+                                <input type="button" value="Usuń" class="btn btn-danger remove-order" />
                             }
                         </td>
                     </tr>
-            }
-        </table>*@
 
-    @section Scripts {
-        <script>
+                    <tr>
+                        <th style="padding-left: 20px;">
+                            @Html.Name("Nazwa")
+                        </th>
+                        <th>
+                            @Html.Name("Ilość")
+                        </th>
+                        <th></th>
+                    </tr>
+                    foreach (var orderItem in item.OrderItems)
+                    {
+                        <tr style="border: none;">
+                            @Html.HiddenFor(x => orderItem.Id, new { @class = "orderItemId" })
+                            <td style="padding-left: 20px;">
+                                @Html.DisplayFor(modelItem => orderItem.Menu.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => orderItem.Quantity)
+                            </td>
+
+                            <td>
+                                if (item.Status == false)
+                                {
+                                    <input type="button" value="Usuń" class="btn btn-danger remove-order-item" />
+                                }
+                            </td>
+                        </tr>
+                }
+            </table>*@
+
+        @section Scripts {
+            <script>
         $(".remove-order").click(function () {
             var orderId = $("#mainOrderId").val();
             var options =
@@ -150,8 +163,8 @@ else
                 function () { },
             );
         });
-        </script>
-        <script>
+            </script>
+            <script>
         $(".confirm-order").click(function () {
             var orderId = $("#mainOrderId").val();
             var options =
@@ -188,8 +201,8 @@ else
                 function () { },
             );
         });
-        </script>
-        <script>
+            </script>
+            <script>
         $(".remove-order-item").click(function () {
             var row = $(this).closest("tr");
             var options =
@@ -231,6 +244,6 @@ else
                 function () { }
             );
     });
-        </script>
+            </script>
+        }
     }
-}
