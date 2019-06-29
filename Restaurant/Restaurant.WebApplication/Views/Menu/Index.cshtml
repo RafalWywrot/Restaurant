@@ -3,6 +3,35 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="row">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                menu
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Amount)
+                        </th>
+                        <th>@Html.DisplayNameFor(model => model.Price)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        @Html.Partial("_OrderElement", item)
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
 
 <div class="row">
     <div class="col-md-4">

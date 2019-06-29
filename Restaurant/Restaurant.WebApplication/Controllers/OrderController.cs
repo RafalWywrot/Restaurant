@@ -2,6 +2,7 @@
 using Restaurant.Domain.Services.Abstract;
 using Restaurant.WebApplication.Helpers;
 using Restaurant.WebApplication.Models;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Restaurant.WebApplication.Controllers
@@ -17,8 +18,8 @@ namespace Restaurant.WebApplication.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            var orders = orderService.Get();
-            return View(orders);
+            var order = orderService.Get().FirstOrDefault();
+            return View(order);
         }
         public JsonResult Add(OrderElementViewModel order)
         {
