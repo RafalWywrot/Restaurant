@@ -235,6 +235,7 @@
     <Compile Include="Models\DiningTableViewModel.cs" />
     <Compile Include="Models\MenuViewModel.cs" />
     <Compile Include="Models\OrderElementViewModel.cs" />
+    <Compile Include="Models\OrdersViewModel.cs" />
     <Compile Include="Models\ReservationTableFormViewModel.cs" />
     <Compile Include="Models\ReservationViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
