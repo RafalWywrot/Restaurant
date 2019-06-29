@@ -11,7 +11,7 @@ namespace Restaurant.WebApplication.Models.Authorization
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Hasło")]
         public string Password { get; set; }
     }
 }

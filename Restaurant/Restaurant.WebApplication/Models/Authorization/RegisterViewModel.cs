@@ -16,7 +16,7 @@ namespace Restaurant.WebApplication.Models.Authorization
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Potwierdź password")]
+        [Display(Name = "Potwierdź hasło")]
         [Compare("Password", ErrorMessage = "Hasła do siebie nie pasuja.")]
         public string ConfirmPassword { get; set; }
 

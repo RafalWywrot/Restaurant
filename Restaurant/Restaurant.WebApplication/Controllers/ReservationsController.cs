@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace Restaurant.WebApplication.Controllers
 {
+    [Authorize]
     public class ReservationsController : Controller
     {
         private IReservationDiningTableService reservationDiningTableService { get; }
