@@ -1,6 +1,9 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-repeat: no-repeat;
+    background-image: url(../Content/assets/dashboard.jpg);
+    background-position: center;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -37,4 +40,12 @@ textarea {
 
 .btn-big-lg {
     padding: 12px 20px
+}
+
+.background-opacity {
+    opacity: 0.6;
+    background-color: darkgray;
+    position: fixed;
+    height: 100%;
+    width: 100%;
 }
