@@ -5,7 +5,7 @@ namespace Restaurant.Database.Repositories.Abstract
 {
     public interface IOrderRepository
     {
-        IList<Order> GetAll();
+        IList<Order> GetAll(ApplicationUser user);
         void InitializeOrder(Order order);
         void AddOrderItem(OrderItem orderItem);
         void Remove(int orderItemId);

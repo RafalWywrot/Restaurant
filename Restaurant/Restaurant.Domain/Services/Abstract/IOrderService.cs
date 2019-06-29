@@ -5,7 +5,7 @@ namespace Restaurant.Domain.Services.Abstract
 {
     public interface IOrderService
     {
-        IList<OrderDTO> Get();
+        IList<OrderDTO> Get(ApplicationUser user);
         void Add(OrderItemDTO order, ApplicationUser user);
         void Remove(int orderItemId);
         void Confirm(int orderId);

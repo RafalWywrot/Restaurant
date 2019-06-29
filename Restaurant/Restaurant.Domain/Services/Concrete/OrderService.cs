@@ -21,15 +21,15 @@ namespace Restaurant.Domain.Services.Concrete
         {
             this.orderRepository = orderRepository;
         }
-        public IList<OrderDTO> Get()
+        public IList<OrderDTO> Get(ApplicationUser user)
         {
-            var orders = orderRepository.GetAll();
+            var orders = orderRepository.GetAll(user);
             return Mapper.Map<List<OrderDTO>>(orders);
         }
 
         public void Add(OrderItemDTO order, ApplicationUser user)
         {
-            var parentOrder = orderRepository.GetAll().Where(x => x.User.Name == user.Name && x.User.Surname == user.Surname && x.Status == false).FirstOrDefault();
+            var parentOrder = orderRepository.GetAll(user).Where(x => x.Status == false).FirstOrDefault();
             if (parentOrder == null)
             {
                 var newOrder = new OrderDTO()

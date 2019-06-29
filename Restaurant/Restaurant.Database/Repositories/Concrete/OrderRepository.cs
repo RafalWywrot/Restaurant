@@ -18,11 +18,11 @@ namespace Restaurant.Database.Repositories.Concrete
             _sessionFactory = sessionFactory.CreateSessionFactory();
         }
 
-        public IList<Order> GetAll()
+        public IList<Order> GetAll(ApplicationUser user)
         {
             using (ISession session = _sessionFactory.OpenSession())
             {
-                return session.Query<Order>().ToList();
+                return session.Query<Order>().Where(x => x.User.Id == user.Id).ToList();
             }
         }
 
