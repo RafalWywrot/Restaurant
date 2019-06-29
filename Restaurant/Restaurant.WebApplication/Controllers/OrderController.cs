@@ -18,8 +18,13 @@ namespace Restaurant.WebApplication.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            var order = orderService.Get().FirstOrDefault();
-            return View(order);
+            var model = new OrdersViewModel()
+            {
+                ActiveOrder = orderService.Get(GetUser()).FirstOrDefault(x => x.Status == false),
+                HistoryOrders = orderService.Get(GetUser()).Where(x => x.Status == true).OrderByDescending(x => x.OrderDate).Take(1).ToList()
+            };
+            //var order = orderService.Get(GetUser()).FirstOrDefault(x => x.Status == false);
+            return View(model);
         }
         public JsonResult Add(OrderElementViewModel order)
         {
