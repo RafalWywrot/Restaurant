@@ -83,7 +83,12 @@ namespace Restaurant.WebApplication.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Name = model.Name,
-                    Surname = model.Surname
+                    Surname = model.Surname,
+                    ContactNumber = model.PhoneNumber,
+                    Street = model.Street,
+                    StreetNumber = model.StreetNumber,
+                    City = model.City,
+                    FlatNumber = model.FlatNumber
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

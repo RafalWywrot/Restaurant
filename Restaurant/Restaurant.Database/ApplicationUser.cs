@@ -20,7 +20,12 @@ namespace Restaurant.Database
     {
         public virtual string Name { get; set; }
         public virtual string Surname { get; set; }
-        
+        public virtual string ContactNumber { get; set; }
+        public virtual string Street { get; set; }
+        public virtual string StreetNumber { get; set; }
+        public virtual string City { get; set; }
+        public virtual string FlatNumber { get; set; }
+
         public virtual async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
