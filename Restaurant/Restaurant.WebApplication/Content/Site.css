@@ -10,6 +10,7 @@
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+    min-height: calc(100vh - 150px);
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -43,9 +44,22 @@ textarea {
 }
 
 .background-opacity {
-    opacity: 0.6;
-    background-color: darkgray;
+    opacity: 0.4;
+    background-color: black;
     position: fixed;
     height: 100%;
     width: 100%;
+    z-index: -1;
+}
+
+.page-footer.container {
+    color: white;
+    font-weight: 900;
+}
+
+.table.table-condensed {
+    margin: 20px;
+    background-color: white;
+    opacity: 0.8;
+    border-radius: 10px;
 }
