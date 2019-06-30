@@ -9,19 +9,32 @@ using Restaurant.WebApplication.Controllers;
 namespace Restaurant.WebApplication.Tests.Controllers
 {
     [TestClass]
-    public class HomeControllerTest
+    public class BookTableControllerTests
     {
         [TestMethod]
         public void Index()
         {
-            // Arrange
-            HomeController controller = new HomeController();
 
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
+        }
+        [TestMethod]
+        public void Index_Post()
+        {
 
-            // Assert
-            Assert.IsNotNull(result);
+        }
+        [TestMethod]
+        public void ReserveTable()
+        {
+
+        }
+        [TestMethod]
+        public void ReserveTable_success()
+        {
+
+        }
+        [TestMethod]
+        public void ReserveTable_Error()
+        {
+
         }
     }
 }
