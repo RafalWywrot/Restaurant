@@ -48,7 +48,7 @@
                 }),
                 success: function (response) { // remove buttons and replace by message response by server
                     if (response) {
-                        toastr.success('Success @Html.ActionLink("Idz do zamówien", "Index", "Order", null, new { @class = "btn btn-primary" })');
+                        toastr.success('Dodano do zamówienia @Html.ActionLink("Idz do zamówien", "Index", "Order", null, new { @class = "btn btn-primary" })');
                     }
                     else {
                         alert('no response');

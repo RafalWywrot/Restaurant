@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Restaurant.WebApplication.Controllers
 {
+    [Authorize]
     public class BookTableController : Controller
     {
         private IBookTableService bookTableService { get; }       

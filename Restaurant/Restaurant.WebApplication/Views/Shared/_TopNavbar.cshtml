@@ -12,7 +12,7 @@
             <li>
                 @Html.ActionLink("Witaj " + User.Identity.GetUserName() + "!", "Index", "Home", routeValues: null, htmlAttributes: new { title = "" })
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj</a></li>
         </ul>
     }
 }

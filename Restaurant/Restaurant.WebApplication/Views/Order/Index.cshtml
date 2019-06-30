@@ -3,7 +3,15 @@
 @{
     ViewBag.Title = "Index";
 }
-@if (Model.ActiveOrder.Status == false)
+@if (Model.ActiveOrder == null)
+{
+    <div class="table-container">
+        <div class="form-title">
+            <span>Brak aktywnych zamówień</span>
+        </div>
+    </div>
+}
+else
 {
     <div class="table-container">
         <div>
@@ -37,7 +45,7 @@
                 {
                     <tr style="border: none;">
                         @Html.HiddenFor(x => orderItem.Id, new { @class = "orderItemId" })
-                        <td style="padding-left: 20px;">
+                        <td style="padding-left: 20px;" class="pizzaName">
                             @Html.DisplayFor(modelItem => orderItem.Menu.Name)
                         </td>
                         <td>
@@ -55,19 +63,12 @@
         </table>
     </div>
 }
-else
-{
-    <div class="table-container">
-        <div class="form-title">
-            <span>Brak aktywnych zamówień</span>
-        </div>
+
+<div class="table-container">
+    <div>
+        <span class="table-description">Historia zamówień:</span>
     </div>
-}
-    <div class="table-container">
-        <div>
-            <span class="table-description">Historia zamówień:</span>            
-        </div>
-    </div>
+</div>
 @if (Model.HistoryOrders.Count > 0)
 {
     foreach (var order in Model.HistoryOrders)
@@ -84,7 +85,7 @@ else
 
         <div class="table-container">
             <div class="form-title">
-                <span>Szczegóły zamówienia</span>
+                <span>Szczegóły ostatniego zamówienia</span>
             </div>
             <table class="table table-condensed">
                 <thead>
@@ -180,44 +181,6 @@ else
 
 @section Scripts {
     <script>
-        $(".remove-order").click(function () {
-            var orderId = $("#mainOrderId").val();
-            var options =
-            {
-                DeclineButtonClasses: "btn btn-default",
-                ConfimButtonClasses: "btn btn-default margin-left-lg"
-            };
-            var confirmDialog = new ConfirmDialog(options);
-            confirmDialog.ShowDialog(
-                "Potwierdz usuniécie zamówienia",
-                "Czy chcesz usunąć to zamówienie?",
-                "Yes",
-                "No",
-                function () {
-                    $.ajax({
-                        url: '@Url.Action("Cancel", "Order")',
-                        type: "POST",
-                        contentType: 'application/json',
-                        datatype: 'json',
-                        data: JSON.stringify({
-                            'orderId': orderId
-                        }),
-                        success: function (response) { // remove buttons and replace by message response by server
-                            if (response) {
-                                location.reload();
-                            }
-                            else {
-                                alert('no response');
-                            }
-                        },
-                        error: function (xhr) { alert('big error') }
-                    });
-                },
-                function () { },
-            );
-        });
-    </script>
-    <script>
         $(".confirm-order").click(function () {
             var orderId = $("#mainOrderId").val();
             var options =
@@ -227,10 +190,10 @@ else
             };
             var confirmDialog = new ConfirmDialog(options);
             confirmDialog.ShowDialog(
-                "Potwierdz zamowienie",
-                "Czy chcesz zatwierdzic to zamówienie?",
-                "Yes",
-                "No",
+                "Potwierdź zamówienie",
+                "Czy chcesz zatwierdzić zamówienie?",
+                "Tak",
+                "Nie",
                 function () {
                     $.ajax({
                         url: '@Url.Action("Confirm", "Order")',
@@ -265,10 +228,10 @@ else
             };
             var confirmDialog = new ConfirmDialog(options);
             confirmDialog.ShowDialog(
-                "text 1",
-                "Content",
-                "Yes",
-                "No",
+                "Potwierdź usunięcie",
+                "Czy chcesz usunąć pizzę " + row.find(".pizzaName").html() + " z listy zamówienia",
+                "Tak",
+                "Nie",
                 function () {
                     $.ajax({
                         url: '@Url.Action("Remove", "Order")',

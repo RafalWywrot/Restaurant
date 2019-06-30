@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Restaurant.WebApplication.Controllers
 {
+    [Authorize]
     public class OrderController : BaseController
     {
         private IOrderService orderService{ get; }
@@ -18,12 +19,13 @@ namespace Restaurant.WebApplication.Controllers
         // GET: Order
         public ActionResult Index()
         {
+            var user = GetUser();
+            var allOrders = orderService.Get(user);
             var model = new OrdersViewModel()
             {
-                ActiveOrder = orderService.Get(GetUser()).FirstOrDefault(x => x.Status == false),
-                HistoryOrders = orderService.Get(GetUser()).Where(x => x.Status == true).OrderByDescending(x => x.OrderDate).Take(1).ToList()
+                ActiveOrder = allOrders.FirstOrDefault(x => x.Status == false),
+                HistoryOrders = allOrders.Where(x => x.Status == true).OrderByDescending(x => x.OrderDate).Take(1).ToList()
             };
-            //var order = orderService.Get(GetUser()).FirstOrDefault(x => x.Status == false);
             return View(model);
         }
         public JsonResult Add(OrderElementViewModel order)
